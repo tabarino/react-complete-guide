@@ -3,14 +3,24 @@ import './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
+  state = {
+    persons: [
+      { name: 'Ivan', age: 39 },
+      { name: 'Rosana', age: 37 },
+      { name: 'Matheus', age: 19 }
+    ],
+    otherProperty: 'Some Other Value'
+  }
+
   render() {
     return (
       <div className="App">
         <h1>Hi, I'm a React App.</h1>
         <p>This is really working!</p>
-        <Person name="Ivan" age="39">My Hobby is Develop.</Person>
-        <Person name="Rosana" age="37">My Hobby is Travel.</Person>
-        <Person name="Matheus" age="19">My Hobby is Sleep.</Person>
+        <button onClick={this.switchNameHandler}>Switch Name</button>
+        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}>My Hobby is Develop.</Person>
+        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My Hobby is Travel.</Person>
+        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>My Hobby is Sleep.</Person>
       </div>
     );
 
@@ -21,6 +31,18 @@ class App extends Component {
     //   'div', { className: 'App' },
     //   React.createElement('h1', null, 'Hi, I\'m a React App.')
     // );
+  }
+
+  switchNameHandler = () => {
+    // Do not mutate state directly. Use setState()
+    // this.state.persons[0].name = 'Ivan Tabarino';
+    this.setState({
+      persons: [
+        { name: 'Ivan Tabarino', age: 39 },
+        { name: 'Rosana', age: 38 },
+        { name: 'Matheus', age: 19 }
+      ]
+    });
   }
 }
 
