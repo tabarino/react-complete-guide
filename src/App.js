@@ -23,6 +23,28 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    let persons = null;
+    if (this.state.showPersons) {
+      persons = (
+        <div >
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}>My Hobby is Develop.
+          </Person>
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, 'Taba')}>My Hobby is Travel.
+          </Person>
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+            changed={this.nameChangedHandler}>My Hobby is Sleep.
+          </Person>
+        </div>
+      )
+    }
+
     return (
       <div className="App">
         <h1>Hi, I'm a React App.</h1>
@@ -30,8 +52,9 @@ class App extends Component {
         <button
           style={style}
           onClick={this.tooglePersonsHandler}>Toogle Persons</button>
+        {persons}
         {/* onClick={() => this.switchNameHandler('Ivan Tabarino')}>Switch Name</button> */}
-        {this.state.showPersons ?
+        {/* {this.state.showPersons ?
           <div >
             <Person
               name={this.state.persons[0].name}
@@ -48,7 +71,7 @@ class App extends Component {
               changed={this.nameChangedHandler}>My Hobby is Sleep.
           </Person>
           </div> : null
-        }
+        } */}
       </div>
     );
 
