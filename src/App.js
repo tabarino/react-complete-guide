@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
 // import React, { useState } from 'react';
-import Radium, { StyleRoot } from 'radium';
+// import Radium, { StyleRoot } from 'radium';
+import styled from 'styled-components';
 import './App.css';
 import Person from './Person/Person';
+
+const StyledButton = styled.button`
+  background-color: ${props => props.alt ? 'red' : 'green'};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  &:hover {
+    background-color: ${props => props.alt ? 'lightcoral' : 'lightgreen'};
+    color: black;
+  }
+`;
 
 class App extends Component {
   state = {
@@ -16,18 +30,18 @@ class App extends Component {
   };
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    };
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    //   ':hover': {
+    //     backgroundColor: 'lightgreen',
+    //     color: 'black'
+    //   }
+    // };
 
     let persons = null;
     if (this.state.showPersons) {
@@ -47,11 +61,11 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'lightcoral',
-        color: 'black'
-      };
+      // style.backgroundColor = 'red';
+      // style[':hover'] = {
+      //   backgroundColor: 'lightcoral',
+      //   color: 'black'
+      // };
     }
 
     const classes = [];
@@ -63,16 +77,20 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I'm a React App.</h1>
-          <p className={classes.join(' ')}>This is really working!</p>
-          <button
-            style={style}
-            onClick={this.tooglePersonsHandler}>Toogle Persons</button>
-          {persons}
-          {/* onClick={() => this.switchNameHandler('Ivan Tabarino')}>Switch Name</button> */}
-          {/* {this.state.showPersons ?
+      // <StyleRoot>
+      <div className="App">
+        <h1>Hi, I'm a React App.</h1>
+        <p className={classes.join(' ')}>This is really working!</p>
+        <StyledButton alt={this.state.showPersons ? 1 : 0} onClick={this.tooglePersonsHandler}>
+          Toogle Persons
+        </StyledButton>
+        {persons}
+        {/* <button
+          style={style}
+          onClick={this.tooglePersonsHandler}>Toogle Persons
+        </button> */}
+        {/* onClick={() => this.switchNameHandler('Ivan Tabarino')}>Switch Name</button> */}
+        {/* {this.state.showPersons ?
           <div >
             <Person
               name={this.state.persons[0].name}
@@ -90,8 +108,8 @@ class App extends Component {
           </Person>
           </div> : null
         } */}
-        </div>
-      </StyleRoot>
+      </div>
+      // </StyleRoot>
     );
 
     // This is the same as the above
@@ -190,4 +208,5 @@ class App extends Component {
 //   );
 // }
 
-export default Radium(App);
+// export default Radium(App);
+export default App;
