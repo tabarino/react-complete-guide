@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from "./App.module.css";
-import Person from '../components/Person/Person';
-import ErrorBoundary from '../components/ErrorBoundary/ErrorBoundary';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -16,74 +16,25 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let buttonClass = '';
 
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return (
-              <ErrorBoundary key={person.id}>
-                <Person
-                  click={this.deletePersonHandler.bind(this, index)}
-                  changed={(event) => this.nameChangedHandler(event, person.id)}
-                  name={person.name}
-                  age={person.age}>
-                </Person>
-              </ErrorBoundary>
-            );
-          })}
-        </div>
-      );
-
-      buttonClass = styles.Red;
-    }
-
-    const classes = [];
-    if (this.state.persons.length <= 2) {
-      classes.push(styles.red);
-    }
-    if (this.state.persons.length <= 1) {
-      classes.push(styles.bold);
+      persons = <Persons
+        persons={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangedHandler}>
+      </Persons>;
     }
 
     return (
       <div className={styles.App}>
-        <h1>Hi, I'm a React App.</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
-        <button className={buttonClass} onClick={this.tooglePersonsHandler}>
-          Toogle Persons
-        </button>
+        <Cockpit
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked={this.tooglePersonsHandler}>
+        </Cockpit>
         {persons}
-        {/* onClick={() => this.switchNameHandler('Ivan Tabarino')}>Switch Name</button> */}
-        {/* {this.state.showPersons ?
-          <div >
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}>My Hobby is Develop.
-          </Person>
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              click={this.switchNameHandler.bind(this, 'Taba')}>My Hobby is Travel.
-          </Person>
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}
-              changed={this.nameChangedHandler}>My Hobby is Sleep.
-          </Person>
-          </div> : null
-        } */}
       </div>
     );
-
-    // This is the same as the above
-    // This is cumbersome and the reason we use the JSX above
-    // The JSX above is compiled in this commented code
-    // return React.createElement(
-    //   'div', { className: 'App' },
-    //   React.createElement('h1', null, 'Hi, I\'m a React App.')
-    // );
   }
 
   tooglePersonsHandler = () => {
@@ -171,6 +122,14 @@ class App extends Component {
 //       <Person name={state.persons[2].name} age={state.persons[2].age}>My Hobby is Sleep.</Person>
 //     </div>
 //   );
+
+//  // This is the same as the above
+//  // This is cumbersome and the reason we use the JSX above
+//  // The JSX above is compiled in this commented code
+//     return React.createElement(
+//       'div', { className: 'App' },
+//       React.createElement('h1', null, 'Hi, I\'m a React App.')
+//     );
 // }
 
 // export default Radium(App);
