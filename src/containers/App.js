@@ -14,7 +14,30 @@ class App extends Component {
     showPersons: false
   };
 
+  constructor(props) {
+    super(props);
+    console.log('App Constructor')
+    // You can set the state here, but in modern versions of react
+    // It is supported and more used do in the way was before.
+    // this.state = {
+    //   persons: [
+    //     { id: '0', name: 'Ivan', age: 39 },
+    //     { id: '1', name: 'Rosana', age: 37 },
+    //     { id: '2', name: 'Matheus', age: 19 }
+    //   ],
+    //   otherProperty: 'Some Other Value',
+    //   showPersons: false
+    // };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('App getDerivedStateFromProps', props);
+    return state;
+  }
+
   render() {
+    console.log('App render');
+
     let persons = null;
 
     if (this.state.showPersons) {
@@ -36,6 +59,10 @@ class App extends Component {
         {persons}
       </div>
     );
+  }
+
+  componentDidMount() {
+    console.log('App componentDidMount');
   }
 
   tooglePersonsHandler = () => {
