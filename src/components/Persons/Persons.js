@@ -1,22 +1,24 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from '../Person/Person';
 import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 
-class Persons extends Component {
+// Pure Components is the normal component with the shouldComponentUpdate already implemented
+// checking if each props of the component changes
+class Persons extends PureComponent {
   // static getDerivedStateFromProps(props, state) {
   //   console.log('Persons getDerivedStateFromProps');
   //   return state;
   // }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('Persons shouldComponentUpdate');
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('Persons shouldComponentUpdate');
     
-    if (nextProps.persons !== this.props.persons) {
-      return true;
-    }
+  //   if (nextProps.persons !== this.props.persons) {
+  //     return true;
+  //   }
 
-    return false;
-  }
+  //   return false;
+  // }
 
   render() {
     console.log('Persons render');
