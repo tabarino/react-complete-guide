@@ -3,6 +3,7 @@ import React, { Component, Fragment } from 'react';
 import withClass from '../../hoc/withClass';
 import styles from './Person.module.css';
 import PropTypes from 'prop-types';
+import AuthContext from '../../context/auth-context';
 
 class Person extends Component {
   constructor(props) {
@@ -38,6 +39,9 @@ class Person extends Component {
     // From React 16 you can use like this
     return (
       <Fragment>
+        <AuthContext.Consumer>
+          {(context) => context.authenticated ? <p>Authenticated</p> : <p>Please log in</p>}
+        </AuthContext.Consumer>
         <p onClick={this.props.click}>I'm {this.props.name} and I'm {this.props.age} years old.</p>
         <p>{this.props.children}</p>
         <input type="text"

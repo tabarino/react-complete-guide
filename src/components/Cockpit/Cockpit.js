@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styles from "./Cockpit.module.css";
+import AuthContext from '../../context/auth-context';
 
 const Cockpit = (props) => {
   const toggleButtonRef = useRef();
@@ -24,7 +25,7 @@ const Cockpit = (props) => {
       clearTimeout(timer);
       console.log('Cockpit cleanup work in useEffect');
     };
-  // If you add this option the useEffect will be called only when the person changes
+    // If you add this option the useEffect will be called only when the person changes
   }, [props.persons]);
   // If you pass an empty array here, it will be called only the first time
   // }, []);
@@ -61,6 +62,9 @@ const Cockpit = (props) => {
       <button className={buttonClass} onClick={props.clicked} ref={toggleButtonRef}>
         Toogle Persons
       </button>
+      <AuthContext.Consumer>
+        {(context) => <button onClick={context.login}>Log in</button>}
+      </AuthContext.Consumer>
     </div>
   );
 }

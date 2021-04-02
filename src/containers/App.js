@@ -5,6 +5,7 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Aux from '../hoc/Aux';
 import withClass from '../hoc/withClass';
 // import WithStyle from '../hoc/WithStyle';
+import AuthContext from '../context/auth-context';
 
 class App extends Component {
   state = {
@@ -16,7 +17,8 @@ class App extends Component {
     otherProperty: 'Some Other Value',
     showPersons: false,
     showCockpit: true,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   };
 
   constructor(props) {
@@ -49,7 +51,8 @@ class App extends Component {
       persons = <Persons
         persons={this.state.persons}
         clicked={this.deletePersonHandler}
-        changed={this.nameChangedHandler}>
+        changed={this.nameChangedHandler}
+        isAuthenticated={this.state.authenticated}>
       </Persons>;
     }
 
@@ -57,13 +60,18 @@ class App extends Component {
       // <WithStyle styles={styles.App}>
       <Aux>
         <button onClick={() => { this.setState({ showCockpit: false }); }}>Remove Cockpit</button>
-        {this.state.showCockpit ? <Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          personsLength={this.state.persons.length}
-          clicked={this.tooglePersonsHandler}>
-        </Cockpit> : null}
-        {persons}
+        <AuthContext.Provider value={{
+          authenticated: this.state.authenticated,
+          login: this.loginHandler
+        }}>
+          {this.state.showCockpit ? <Cockpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            personsLength={this.state.persons.length}
+            clicked={this.tooglePersonsHandler}>
+          </Cockpit> : null}
+          {persons}
+        </AuthContext.Provider>
       </Aux>
       // </WithStyle>
     );
@@ -80,6 +88,10 @@ class App extends Component {
 
   componentDidUpdate() {
     console.log('App componentDidUpdate');
+  }
+
+  loginHandler = () => {
+    this.setState({ authenticated: true });
   }
 
   tooglePersonsHandler = () => {
