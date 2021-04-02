@@ -2,11 +2,19 @@ import React, { useEffect } from 'react';
 import styles from "./Cockpit.module.css";
 
 const Cockpit = (props) => {
-  // It is like componentDidMount and componentDidUpdate and just this Effect
+  // It combines componentDidMount and componentDidUpdate
+  // It is like componentDidMount and componentDidUpdate in just this Effect
   useEffect(() => {
     console.log('Cockpit useEffect');
     // You can send a HTTP Request from here
-  });
+
+    setTimeout(() => {
+      alert('Saved Data to Cloud.')
+    }, 1000);
+  // If you add this option the useEffect will be called only when the person changes
+  }, [props.persons]);
+  // If you pass an empty array here, it will be called only the first time
+  // }, []);
 
   const assignedClasses = [];
   let buttonClass = '';
