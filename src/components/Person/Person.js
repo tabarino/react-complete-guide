@@ -5,6 +5,11 @@ import styles from './Person.module.css';
 import PropTypes from 'prop-types';
 
 class Person extends Component {
+  constructor(props) {
+    super(props);
+    this.inputElementRef = React.createRef();
+  }
+
   // const Person = (props) => {
   // const rnd = Math.random();
   // if (rnd > 0.7) {
@@ -35,7 +40,11 @@ class Person extends Component {
       <Fragment>
         <p onClick={this.props.click}>I'm {this.props.name} and I'm {this.props.age} years old.</p>
         <p>{this.props.children}</p>
-        <input type="text" onChange={this.props.changed} value={this.props.name}></input>
+        <input type="text"
+          ref={this.inputElementRef}
+          onChange={this.props.changed}
+          value={this.props.name}>
+        </input>
       </Fragment>
     );
   }
@@ -47,6 +56,10 @@ class Person extends Component {
   //     <input type="text" onChange={props.changed} value={props.name}></input>
   //   </div>
   // );
+
+  componentDidMount() {
+    this.inputElementRef.current.focus();
+  }
 }
 
 Person.propTypes = {
