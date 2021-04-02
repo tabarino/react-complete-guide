@@ -4,7 +4,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 import Aux from '../hoc/Aux';
 import withClass from '../hoc/withClass';
-import WithStyle from '../hoc/WithStyle';
+// import WithStyle from '../hoc/WithStyle';
 
 class App extends Component {
   state = {
