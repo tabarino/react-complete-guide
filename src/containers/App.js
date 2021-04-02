@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styles from "./App.module.css";
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithStyle from '../hoc/WithStyle';
 
 class App extends Component {
   state = {
@@ -50,7 +51,7 @@ class App extends Component {
     }
 
     return (
-      <div className={styles.App}>
+      <WithStyle styles={styles.App}>
         <button onClick={() => { this.setState({ showCockpit: false }); }}>Remove Cockpit</button>
         {this.state.showCockpit ? <Cockpit
           title={this.props.appTitle}
@@ -59,7 +60,7 @@ class App extends Component {
           clicked={this.tooglePersonsHandler}>
         </Cockpit> : null}
         {persons}
-      </div>
+      </WithStyle>
     );
   }
 
