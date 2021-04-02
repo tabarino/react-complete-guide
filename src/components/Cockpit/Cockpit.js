@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import styles from "./Cockpit.module.css";
 import AuthContext from '../../context/auth-context';
 
 const Cockpit = (props) => {
   const toggleButtonRef = useRef();
+  const authContext = useContext(AuthContext);
 
   // It combines componentDidMount and componentDidUpdate
   // It is like componentDidMount and componentDidUpdate in just this Effect
@@ -62,9 +63,10 @@ const Cockpit = (props) => {
       <button className={buttonClass} onClick={props.clicked} ref={toggleButtonRef}>
         Toogle Persons
       </button>
-      <AuthContext.Consumer>
+      <button onClick={authContext.login}>Log in</button>
+      {/* <AuthContext.Consumer>
         {(context) => <button onClick={context.login}>Log in</button>}
-      </AuthContext.Consumer>
+      </AuthContext.Consumer> */}
     </div>
   );
 }
