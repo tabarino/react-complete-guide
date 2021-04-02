@@ -8,7 +8,7 @@ const Cockpit = (props) => {
     console.log('Cockpit useEffect');
     // You can send a HTTP Request from here
 
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       alert('Saved Data to Cloud.')
     }, 1000);
 
@@ -16,6 +16,7 @@ const Cockpit = (props) => {
     // but AFTER the (first) render cycle
     // It will be called when the Component gets destroyed
     return () => {
+      clearTimeout(timer);
       console.log('Cockpit cleanup work in useEffect');
     };
 
