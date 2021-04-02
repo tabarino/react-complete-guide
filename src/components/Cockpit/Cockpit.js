@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styles from "./Cockpit.module.css";
 
 const Cockpit = (props) => {
+  const toggleButtonRef = useRef();
+
   // It combines componentDidMount and componentDidUpdate
   // It is like componentDidMount and componentDidUpdate in just this Effect
   useEffect(() => {
@@ -12,6 +14,9 @@ const Cockpit = (props) => {
       alert('Saved Data to Cloud.')
     }, 1000);
 
+    // Click button automatically
+    toggleButtonRef.current.click();
+
     // It runs BEFORE the main useEffect function runs,
     // but AFTER the (first) render cycle
     // It will be called when the Component gets destroyed
@@ -19,7 +24,6 @@ const Cockpit = (props) => {
       clearTimeout(timer);
       console.log('Cockpit cleanup work in useEffect');
     };
-
   // If you add this option the useEffect will be called only when the person changes
   }, [props.persons]);
   // If you pass an empty array here, it will be called only the first time
@@ -54,7 +58,7 @@ const Cockpit = (props) => {
     <div className={styles.Cockpit}>
       <h1>{props.title}</h1>
       <p className={assignedClasses.join(' ')}>This is really working!</p>
-      <button className={buttonClass} onClick={props.clicked}>
+      <button className={buttonClass} onClick={props.clicked} ref={toggleButtonRef}>
         Toogle Persons
       </button>
     </div>
