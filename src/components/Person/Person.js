@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 // import Aux from '../../hoc/Aux';
 import withClass from '../../hoc/withClass';
-import styles from "./Person.module.css";
+import styles from './Person.module.css';
+import PropTypes from 'prop-types';
 
 class Person extends Component {
   // const Person = (props) => {
@@ -46,6 +47,13 @@ class Person extends Component {
   //     <input type="text" onChange={props.changed} value={props.name}></input>
   //   </div>
   // );
+}
+
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
 }
 
 export default withClass(Person, styles.Person);
